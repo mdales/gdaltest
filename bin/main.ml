@@ -10,7 +10,7 @@ let make_raster fname dimensions gt wkt =
   raster
 
 let process species season = 
-  let filename = Printf.sprintf "/scratch/IUCN-star/results/%s_%s.tif" species season in
+  let filename = Printf.sprintf "/maps/mwd24/tmp/iucn/%s_%s.tif" species season in
 
   let gt, wkt = Gdal.Data_set.with_source_exn filename (fun ds ->
     Printf.printf "%dx%d\n" (Gdal.Data_set.get_x_size ds) (Gdal.Data_set.get_y_size ds);
@@ -23,7 +23,7 @@ let process species season =
   ) in
   let pixel_size = Gdal.Geo_transform.get_pixel_size gt in
 
-  Gdal.Data_source.with_source_exn "/home/michael/DigitalFlapjack/Clients/4C/dev/iucn-aoh/test_species_hab_elev.geojson" (fun ds ->
+  Gdal.Data_source.with_source_exn "/maps/mwd24/iucn-aoh/test_species_hab_elev.geojson" (fun ds ->
     let layers = Gdal.Data_source.get_layer_count ds in
     Printf.printf "layers %d\n" layers;
 
